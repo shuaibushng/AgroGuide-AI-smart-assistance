@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AgroGuide AI - a farming assistant prototype for farmers in Gombe State.">
+  <title>AgroGuide AI | Smart Farming Assistant</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="AgroGuide AI home"><span class="brand-icon">🌱</span><span>AgroGuide <b>AI</b></span></a>
+    <div class="header-actions">
+      <label class="sr-only" for="language">Language</label>
+      <select id="language" aria-label="Choose language">
+        <option value="en">English</option>
+        <option value="ha">Hausa</option>
+      </select>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow" data-en="SMART FARMING FOR GOMBE" data-ha="NOMA MAI WAYO A GOMBE">SMART FARMING FOR GOMBE</span>
+        <h1 data-en="Grow smarter.<br>Harvest better." data-ha="Yi noma cikin basira.<br>Ka samu girbi mai kyau.">Grow smarter.<br>Harvest better.</h1>
+        <p data-en="Practical crop guidance for farmers. Start with a crop question or upload a leaf photo for a preliminary check." data-ha="Shawarar noma mai amfani ga manoma. Fara da tambaya ko ɗora hoton ganye domin duba na farko.">Practical crop guidance for farmers. Start with a crop question or upload a leaf photo for a preliminary check.</p>
+        <a class="button primary" href="#crop-check" data-en="Check a crop →" data-ha="Duba amfanin gona →">Check a crop →</a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="sun"></div><div class="hill hill-back"></div><div class="hill hill-front"></div>
+        <div class="plant plant-one">🌿</div><div class="plant plant-two">🌾</div><div class="plant plant-three">🌱</div>
+      </div>
+    </section>
+
+    <section class="notice">
+      <span>ℹ️</span>
+      <p data-en="Prototype notice: this starter version uses simple demo rules. It does not yet run a trained image-diagnosis model or live weather/market feeds." data-ha="Bayani: wannan sigar gwaji tana amfani da ƙa'idoji masu sauƙi. Ba ta haɗa da cikakken samfurin gano cuta daga hoto ko bayanan yanayi/kasuwa kai tsaye ba tukuna.">Prototype notice: this starter version uses simple demo rules. It does not yet run a trained image-diagnosis model or live weather/market feeds.</p>
+    </section>
+
+    <section class="section" id="crop-check">
+      <div class="section-heading">
+        <div><span class="eyebrow" data-en="01 / CROP HEALTH" data-ha="01 / LAFIYAR AMFANIN GONA">01 / CROP HEALTH</span><h2 data-en="Check your crop" data-ha="Duba amfanin gonarka">Check your crop</h2></div>
+        <p data-en="Choose a crop, describe what you see, or add a photo." data-ha="Zaɓi amfanin gona, bayyana abin da ka gani, ko saka hoto.">Choose a crop, describe what you see, or add a photo.</p>
+      </div>
+      <div class="checker-grid">
+        <form id="diagnosis-form" class="card form-card">
+          <label for="crop" data-en="Crop type" data-ha="Nau'in amfanin gona">Crop type</label>
+          <select id="crop" required>
+            <option value="maize">Maize / Masara</option>
+            <option value="rice">Rice / Shinkafa</option>
+            <option value="groundnut">Groundnut / Gyada</option>
+            <option value="tomato">Tomato / Tumatir</option>
+            <option value="other">Other / Wani</option>
+          </select>
+          <label for="symptom" data-en="What do you notice?" data-ha="Me ka lura da shi?">What do you notice?</label>
+          <select id="symptom" required>
+            <option value="yellow">Yellow leaves / Ganye ya yi rawaya</option>
+            <option value="spots">Spots or lesions / Tabon ganye</option>
+            <option value="holes">Holes or insects / Ramuka ko kwari</option>
+            <option value="wilting">Wilting / Shuka tana bushewa</option>
+            <option value="stunted">Slow growth / Girma ya tsaya</option>
+            <option value="unknown">Not sure / Ban sani ba</option>
+          </select>
+          <label for="notes" data-en="Extra details (optional)" data-ha="Ƙarin bayani (ba dole ba)">Extra details (optional)</label>
+          <textarea id="notes" rows="3" placeholder="When did it start? How much of the field is affected?"></textarea>
+          <label class="upload-box" for="photo"><span class="upload-icon">📷</span><span><b data-en="Add a crop photo" data-ha="Saka hoton shuka">Add a crop photo</b><small data-en="JPG, PNG or WEBP" data-ha="JPG, PNG ko WEBP">JPG, PNG or WEBP</small></span><input id="photo" type="file" accept="image/*"></label>
+          <div id="photo-preview" class="photo-preview" hidden><img id="preview-image" alt="Selected crop preview"><button id="remove-photo" type="button" class="text-button" data-en="Remove photo" data-ha="Cire hoto">Remove photo</button></div>
+          <button class="button primary full" type="submit" data-en="Get preliminary guidance" data-ha="Samu shawarar farko">Get preliminary guidance</button>
+        </form>
+        <div class="card result-card" id="result-card" aria-live="polite">
+          <div class="result-empty" id="result-empty"><div class="result-icon">🌿</div><h3 data-en="Your crop report will appear here" data-ha="Rahoton shukarka zai bayyana a nan">Your crop report will appear here</h3><p data-en="Select the symptoms you see and press the button to receive general guidance." data-ha="Zaɓi alamun da ka gani sannan ka danna maɓallin domin samun shawara ta gama-gari.">Select the symptoms you see and press the button to receive general guidance.</p></div>
+          <div id="result-content" hidden></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section two-column">
+      <div class="section-heading"><div><span class="eyebrow" data-en="02 / FARMING TIPS" data-ha="02 / SHAWARWARIN NOMA">02 / FARMING TIPS</span><h2 data-en="Advice for your farm" data-ha="Shawara ga gonarka">Advice for your farm</h2></div></div>
+      <div class="tips-grid">
+        <article class="card tip-card"><span class="tip-emoji">💧</span><h3 data-en="Water wisely" data-ha="Yi amfani da ruwa cikin hikima">Water wisely</h3><p data-en="Check soil moisture before watering. Avoid waterlogging, especially around young plants." data-ha="Duba danshin ƙasa kafin shayarwa. Ka guji tsayuwar ruwa, musamman kusa da ƙananan shuke-shuke.">Check soil moisture before watering. Avoid waterlogging, especially around young plants.</p></article>
+        <article class="card tip-card"><span class="tip-emoji">🧹</span><h3 data-en="Scout regularly" data-ha="Duba gona akai-akai">Scout regularly</h3><p data-en="Inspect both sides of leaves weekly. Early detection can help reduce crop damage." data-ha="Duba ɓangarorin ganye biyu kowane mako. Gano matsala da wuri na iya rage lalacewa.">Inspect both sides of leaves weekly. Early detection can help reduce crop damage.</p></article>
+        <article class="card tip-card"><span class="tip-emoji">🌱</span><h3 data-en="Protect soil health" data-ha="Kula da lafiyar ƙasa">Protect soil health</h3><p data-en="Use locally recommended planting practices and seek soil-test advice before applying fertilizer." data-ha="Bi shawarwarin noma na yankinku kuma nemi gwajin ƙasa kafin amfani da taki.">Use locally recommended planting practices and seek soil-test advice before applying fertilizer.</p></article>
+      </div>
+    </section>
+
+    <section class="section market-section">
+      <div class="market-copy"><span class="eyebrow" data-en="03 / MARKET NOTES" data-ha="03 / BAYANAN KASUWA">03 / MARKET NOTES</span><h2 data-en="Make informed decisions" data-ha="Yanke shawara bisa bayani">Make informed decisions</h2><p data-en="Add trusted local market sources in the next version to show dated prices, locations, and contact details. Never rely on an undated price." data-ha="A sigar gaba, a haɗa amintattun hanyoyin kasuwa domin nuna farashi tare da kwanan wata, wuri da lambar tuntuɓa. Kada a dogara da farashin da ba shi da kwanan wata.">Add trusted local market sources in the next version to show dated prices, locations, and contact details. Never rely on an undated price.</p></div>
+      <div class="market-badge"><span>📍</span><b data-en="Built for local farming" data-ha="An tsara shi don noma na gida">Built for local farming</b><small data-en="Gombe State, Nigeria" data-ha="Jihar Gombe, Najeriya">Gombe State, Nigeria</small></div>
+    </section>
+  </main>
+
+  <footer><a class="brand" href="#"><span class="brand-icon">🌱</span><span>AgroGuide <b>AI</b></span></a><p data-en="Open-source starter project · Built for community impact" data-ha="Aikin buɗaɗɗen tushe · An gina shi don amfanin al'umma">Open-source starter project · Built for community impact</p><small>© <span id="year"></span> AgroGuide AI</small></footer>
+  <script src="app.js"></script>
+</body>
+</html>
